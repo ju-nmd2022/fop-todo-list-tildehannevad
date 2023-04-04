@@ -1,16 +1,22 @@
-h1 {
+* {
   font-family: sans-serif;
+}
+
+h1 {
   text-align: center;
 }
 
 #taskMaker {
-  font-family: serif;
-  font-size: x-small;
   text-align: center;
 }
 
-#checkMark {
+#plus {
   font-size: large;
+}
+
+h2 {
+  font-family: serif;
+  font-size: medium;
 }
 
 /* The following 7 lines of code is collected from https://stackoverflow.com/questions/6921792/how-to-draw-circle-in-html-page retrived 23-04-04*/
@@ -31,24 +37,9 @@ h1 {
   text-align: center;
 }
 
-#firstArticle {
+#article {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   padding-top: 10vh;
 }
-
-#secondArticle {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-#triangle {
-  width: 0rem;
-  height: 0rem;
-  border-left: 10rem solid transparent;
-  border-right: 10rem solid transparent;
-  border-bottom: 20rem solid lightpink;
-}
-

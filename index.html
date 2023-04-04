@@ -14,17 +14,20 @@
     </header>
     <div id="taskMaker">
       <h2>ADD TASK</h2>
-      <input type="text" />
-      <button id="checkMark">➕</button>
+      <input id="taskField" type="text" />
+      <button id="plus">➕</button>
     </div>
     <main>
-        <article id="firstArticle">
-            <div id="circle">To Do</div>
-            <div id="rectangle">Finished</div>
-        </article>
-        <article id="secondArticle">
-            <div id="triangle">Triangle</div>
-        </article>
+      <article id="article">
+        <div id="circle">
+          <h2>To Do</h2>
+          <div id="list"></div>
+        </div>
+        <div id="rectangle">
+          <h2>Finished</h2>
+          <div id="done"></div>
+        </div>
+      </article>
     </main>
   </body>
 </html>
