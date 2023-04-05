@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="main.css" />
-    <script src="toDo.js" defer></script>
     <title>Just do it</title>
   </head>
   <body>
@@ -21,13 +20,18 @@
       <article id="article">
         <div id="circle">
           <h2>To Do</h2>
-          <div id="list"></div>
+          <div id="listContainer">
+            <ul id="list"></ul>
+          </div>
         </div>
         <div id="rectangle">
           <h2>Finished</h2>
-          <div id="done"></div>
+          <div id="doneContainer">
+            <ul id="done"></ul>
+          </div>
         </div>
       </article>
     </main>
+    <script src="toDo.js"></script>
   </body>
 </html>

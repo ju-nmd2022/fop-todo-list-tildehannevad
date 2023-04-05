@@ -19,6 +19,27 @@ h2 {
   font-size: medium;
 }
 
+ul li {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1rem 3rem 1fr;
+  padding: 1rem;
+}
+
+ul li input {
+  width: 1rem;
+  height: 1rem;
+}
+
+ul li p {
+  margin: 0;
+}
+
+ul li img {
+  width: 1.2rem;
+  margin: auto;
+}
+
 /* The following 7 lines of code is collected from https://stackoverflow.com/questions/6921792/how-to-draw-circle-in-html-page retrived 23-04-04*/
 #circle {
   width: 20rem;
@@ -32,7 +53,6 @@ h2 {
 
 #rectangle {
   width: 20rem;
-  height: 20rem;
   background: lightgreen;
   text-align: center;
 }
