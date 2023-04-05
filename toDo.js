@@ -1,3 +1,8 @@
+// Foundations Of Programming
+// Tilde Hannevad
+// To Do List
+// 2023-04-04
+
 const taskFieldElement = document.getElementById("taskField");
 const addTaskElement = document.getElementById("plus");
 const listElement = document.getElementById("list");
@@ -6,9 +11,10 @@ const doneElement = document.getElementById("done");
 let task;
 let toDo = [];
 
-addTaskElement.onclick = addToTaskList;
+addTaskElement.onclick = addAndRemoveTasks;
 
-function addToTaskList() {
+function addAndRemoveTasks() {
+  //Causes the input value to be in the list
   task = taskFieldElement.value;
 
   toDo.push(task);
@@ -18,6 +24,7 @@ function addToTaskList() {
 
   toDoText.innerText = task;
 
+  //Creates the checkbox and the click-function of it
   const checkBox = document.createElement("input");
   checkBox.type = "radio";
   checkBox.checked = false;
@@ -36,6 +43,7 @@ function addToTaskList() {
     listElement.removeChild(toDoList);
   });
 
+  //Removes the task when the trashbin is pressed
   const trashBin = document.createElement("img");
   trashBin.src = "images.jpeg";
 

@@ -2,16 +2,35 @@
   font-family: sans-serif;
 }
 
+header {
+  align-items: center;
+}
+
+header img {
+  width: 20vw;
+  position: absolute;
+  margin-left: 40vw;
+}
+
 h1 {
-  text-align: center;
+  color: lightpink;
+  z-index: 1;
+  display: flex;
+  align-self: center;
 }
 
 #taskMaker {
   text-align: center;
 }
 
+#taskField {
+  border: 2px solid #777777;
+  height: 1.3rem;
+  width: 10rem;
+}
+
 #plus {
-  font-size: large;
+  size: large;
 }
 
 h2 {
