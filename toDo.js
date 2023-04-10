@@ -11,6 +11,7 @@ const doneElement = document.getElementById("done");
 let task;
 let toDo = [];
 
+// when plus-button is pressed the function assAndRemoveTasks starts
 addTaskElement.onclick = addAndRemoveTasks;
 
 function addAndRemoveTasks() {

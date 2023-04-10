@@ -2,19 +2,16 @@
   font-family: sans-serif;
 }
 
-header {
-  align-content: center;
-}
-
 header img {
   width: 20vw;
+  margin-left: 40%;
   position: absolute;
 }
 
 h1 {
-  color: lightpink;
   z-index: 1;
-  align-self: center;
+  color: lightpink;
+  text-align: center;
 }
 
 #taskMaker {
