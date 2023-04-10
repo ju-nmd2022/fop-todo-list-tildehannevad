@@ -15,6 +15,8 @@ addTaskElement.onclick = addAndRemoveTasks;
 
 function addAndRemoveTasks() {
   //Causes the input value to be in the list
+  localStorage.saveTask = task;
+
   task = taskFieldElement.value;
 
   toDo.push(task);
@@ -58,3 +60,7 @@ function addAndRemoveTasks() {
 
   taskFieldElement.value = "";
 }
+
+window.addEventListener("load", () => {
+  const task = localStorage.saveTask;
+});

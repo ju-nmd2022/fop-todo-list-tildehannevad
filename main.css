@@ -3,19 +3,17 @@
 }
 
 header {
-  align-items: center;
+  align-content: center;
 }
 
 header img {
   width: 20vw;
   position: absolute;
-  margin-left: 40vw;
 }
 
 h1 {
   color: lightpink;
   z-index: 1;
-  display: flex;
   align-self: center;
 }
 
