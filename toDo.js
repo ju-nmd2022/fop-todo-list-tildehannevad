@@ -8,7 +8,6 @@ const addTaskElement = document.getElementById("plus");
 const listElement = document.getElementById("list");
 const doneElement = document.getElementById("done");
 
-const tasksKey = "tasksKey";
 let toDo = [];
 collectLocalStorage();
 
@@ -17,10 +16,10 @@ addTaskElement.onclick = addAndRemoveTasks;
 
 function addAndRemoveTasks(collectedTasks) {
   //Causes the input value to be in the list
-
   let task = taskFieldElement.value;
 
   toDo.push(task);
+  saveToLocalStorage();
 
   const toDoList = document.createElement("li");
   const toDoText = document.createElement("p");
@@ -38,12 +37,12 @@ function addAndRemoveTasks(collectedTasks) {
     const doneList = document.createElement("li");
     const doneText = document.createElement("p");
 
-    doneText.innerText = task;
+    doneText.innerText = collectedTasks;
 
     doneList.appendChild(doneText);
     doneElement.appendChild(doneList);
 
-    listElement.removeChild(toDoList);
+    // listElement.removeChild(toDoList);
     saveToLocalStorage();
   });
 
@@ -54,7 +53,6 @@ function addAndRemoveTasks(collectedTasks) {
   trashBin.addEventListener("click", () => {
     deleteLocalStorage(collectedTasks);
     readList();
-    // listElement.removeChild(toDoList);
   });
 
   toDoList.appendChild(checkBox);
