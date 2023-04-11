@@ -15,7 +15,7 @@ collectLocalStorage();
 // when plus-button is pressed the function addAndRemoveTasks starts
 addTaskElement.onclick = addAndRemoveTasks;
 
-function addAndRemoveTasks() {
+function addAndRemoveTasks(collectedTasks) {
   //Causes the input value to be in the list
 
   let task = taskFieldElement.value;
@@ -25,7 +25,7 @@ function addAndRemoveTasks() {
   const toDoList = document.createElement("li");
   const toDoText = document.createElement("p");
 
-  toDoText.innerText = task;
+  toDoText.innerText = collectedTasks;
 
   //Creates the checkbox and the click-function of it
   const checkBox = document.createElement("input");
@@ -52,8 +52,9 @@ function addAndRemoveTasks() {
   trashBin.src = "images.jpeg";
 
   trashBin.addEventListener("click", () => {
-    listElement.removeChild(toDoList);
-    saveToLocalStorage();
+    deleteLocalStorage(collectedTasks);
+    readList();
+    // listElement.removeChild(toDoList);
   });
 
   toDoList.appendChild(checkBox);
@@ -63,24 +64,37 @@ function addAndRemoveTasks() {
 
   taskFieldElement.value = "";
   saveToLocalStorage();
-
-  // toDo = JSON.stringify(toDo);
-  // localStorage.setItem("savedTasks", toDo);
 }
 
 // Local storage
 function saveToLocalStorage() {
   let json = JSON.stringify(toDo);
-  localStorage.setItem(tasksKey, json);
+  localStorage.setItem("tasksKey", json);
 }
 
 function collectLocalStorage() {
-  let json = localStorage.getItem(tasksKey);
+  let json = localStorage.getItem("tasksKey");
 
   if (json != null) {
     let mask = JSON.parse(json);
     toDo = mask;
+    readList();
   }
+}
+
+function deleteLocalStorage(collectedTasks) {
+  let index = toDo.findIndex((toDoTask) => toDoTask === collectedTasks);
+  if (index > -1) {
+    toDo.splice(index, 1);
+  }
+  saveToLocalStorage();
+}
+
+function readList() {
+  listElement.textContent = "";
+  toDo.forEach((collectedTasks) => {
+    addAndRemoveTasks(collectedTasks);
+  });
 }
 
 window.addEventListener("load", () => {});
