@@ -8,13 +8,16 @@ const addTaskElement = document.getElementById("plus");
 const listElement = document.getElementById("list");
 const doneElement = document.getElementById("done");
 
+const tasksKey = "tasksKey";
+let toDo = [];
+collectLocalStorage();
+
 // when plus-button is pressed the function addAndRemoveTasks starts
 addTaskElement.onclick = addAndRemoveTasks;
 
 function addAndRemoveTasks() {
   //Causes the input value to be in the list
 
-  let toDo = [];
   let task = taskFieldElement.value;
 
   toDo.push(task);
@@ -41,6 +44,7 @@ function addAndRemoveTasks() {
     doneElement.appendChild(doneList);
 
     listElement.removeChild(toDoList);
+    saveToLocalStorage();
   });
 
   //Removes the task when the trashbin is pressed
@@ -49,6 +53,7 @@ function addAndRemoveTasks() {
 
   trashBin.addEventListener("click", () => {
     listElement.removeChild(toDoList);
+    saveToLocalStorage();
   });
 
   toDoList.appendChild(checkBox);
@@ -57,11 +62,25 @@ function addAndRemoveTasks() {
   listElement.appendChild(toDoList);
 
   taskFieldElement.value = "";
+  saveToLocalStorage();
 
-  toDo = JSON.stringify(toDo);
-  localStorage.setItem("savedTasks", toDo);
+  // toDo = JSON.stringify(toDo);
+  // localStorage.setItem("savedTasks", toDo);
 }
 
-window.addEventListener("load", () => {
-  // const task = localStorage.getItem(task);
-});
+// Local storage
+function saveToLocalStorage() {
+  let json = JSON.stringify(toDo);
+  localStorage.setItem(tasksKey, json);
+}
+
+function collectLocalStorage() {
+  let json = localStorage.getItem(tasksKey);
+
+  if (json != null) {
+    let mask = JSON.parse(json);
+    toDo = mask;
+  }
+}
+
+window.addEventListener("load", () => {});
