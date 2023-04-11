@@ -8,17 +8,14 @@ const addTaskElement = document.getElementById("plus");
 const listElement = document.getElementById("list");
 const doneElement = document.getElementById("done");
 
-let task;
-let toDo = [];
-
-// when plus-button is pressed the function assAndRemoveTasks starts
+// when plus-button is pressed the function addAndRemoveTasks starts
 addTaskElement.onclick = addAndRemoveTasks;
 
 function addAndRemoveTasks() {
   //Causes the input value to be in the list
-  localStorage.saveTask = task;
 
-  task = taskFieldElement.value;
+  let toDo = [];
+  let task = taskFieldElement.value;
 
   toDo.push(task);
 
@@ -60,8 +57,11 @@ function addAndRemoveTasks() {
   listElement.appendChild(toDoList);
 
   taskFieldElement.value = "";
+
+  toDo = JSON.stringify(toDo);
+  localStorage.setItem("savedTasks", toDo);
 }
 
 window.addEventListener("load", () => {
-  const task = localStorage.saveTask;
+  // const task = localStorage.getItem(task);
 });
