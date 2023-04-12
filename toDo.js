@@ -8,17 +8,24 @@ const addTaskElement = document.getElementById("plus");
 const listElement = document.getElementById("list");
 const doneElement = document.getElementById("done");
 
+<<<<<<< HEAD
 let toDo = [];
 collectLocalStorage();
 
 // when plus-button is pressed the function addAndRemoveTasks starts
+=======
+let task;
+let toDo = [];
+
+// when plus-button is pressed the function assAndRemoveTasks starts
+>>>>>>> parent of cfcfe46 (attempt 2 savestorage)
 addTaskElement.onclick = addAndRemoveTasks;
 
 function addAndRemoveTasks(collectedTasks) {
   //Causes the input value to be in the list
+  localStorage.saveTask = task;
 
-  let toDo = [];
-  let task = taskFieldElement.value;
+  task = taskFieldElement.value;
 
   toDo.push(task);
   saveToLocalStorage();
@@ -68,6 +75,7 @@ function addAndRemoveTasks(collectedTasks) {
   listElement.appendChild(toDoList);
 
   taskFieldElement.value = "";
+<<<<<<< HEAD
   saveToLocalStorage();
 }
 
@@ -101,3 +109,10 @@ function readList() {
     addAndRemoveTasks(collectedTasks);
   });
 }
+=======
+}
+
+window.addEventListener("load", () => {
+  const task = localStorage.saveTask;
+});
+>>>>>>> parent of cfcfe46 (attempt 2 savestorage)
