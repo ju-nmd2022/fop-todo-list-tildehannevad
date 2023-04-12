@@ -1,20 +1,42 @@
 * {
-    font-family: sans-serif;
+  font-family: sans-serif;
+}
+
+header {
+  text-align: center;
+  color: lightpink;
+  text-transform: uppercase;
 }
 
 #container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
 }
 
-#itemList {
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1 fr);
+.list {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
 }
 
-#packedList {
-    background-color: lightblue;
-    padding: 1rem;
+#bagSize {
+  font-size: 1.5rem;
 }
 
+.bag {
+  background-color: lightblue;
+  padding: 1rem;
+  width: 30rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.item {
+  font-size: 3em;
+  text-align: center;
+  width: 10rem;
+}
+
+.regretButton {
+    font-size: 1rem;
+}
