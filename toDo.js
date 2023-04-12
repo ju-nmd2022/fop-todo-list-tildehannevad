@@ -42,7 +42,6 @@ function addAndRemoveTasks(collectedTasks) {
     doneList.appendChild(doneText);
     doneElement.appendChild(doneList);
 
-    // listElement.removeChild(toDoList);
     saveToLocalStorage();
   });
 
@@ -94,5 +93,3 @@ function readList() {
     addAndRemoveTasks(collectedTasks);
   });
 }
-
-window.addEventListener("load", () => {});
