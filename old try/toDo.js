@@ -8,17 +8,10 @@ const addTaskElement = document.getElementById("plus");
 const listElement = document.getElementById("list");
 const doneElement = document.getElementById("done");
 
-<<<<<<< HEAD
 let toDo = [];
 collectLocalStorage();
 
-// when plus-button is pressed the function addAndRemoveTasks starts
-=======
-let task;
-let toDo = [];
-
 // when plus-button is pressed the function assAndRemoveTasks starts
->>>>>>> parent of cfcfe46 (attempt 2 savestorage)
 addTaskElement.onclick = addAndRemoveTasks;
 
 function addAndRemoveTasks(collectedTasks) {
@@ -28,7 +21,6 @@ function addAndRemoveTasks(collectedTasks) {
   task = taskFieldElement.value;
 
   toDo.push(task);
-  saveToLocalStorage();
 
   const toDoList = document.createElement("li");
   const toDoText = document.createElement("p");
@@ -50,11 +42,7 @@ function addAndRemoveTasks(collectedTasks) {
 
     doneList.appendChild(doneText);
     doneElement.appendChild(doneList);
-
-    saveToLocalStorage();
-
     listElement.removeChild(toDoList);
-
     listElement.removeChild(toDoList);
   });
 
@@ -63,9 +51,6 @@ function addAndRemoveTasks(collectedTasks) {
   trashBin.src = "images.jpeg";
 
   trashBin.addEventListener("click", () => {
-    deleteLocalStorage(collectedTasks);
-    readList();
-
     listElement.removeChild(toDoList);
   });
 
@@ -75,44 +60,4 @@ function addAndRemoveTasks(collectedTasks) {
   listElement.appendChild(toDoList);
 
   taskFieldElement.value = "";
-<<<<<<< HEAD
-  saveToLocalStorage();
 }
-
-// Local storage
-function saveToLocalStorage() {
-  let json = JSON.stringify(toDo);
-  localStorage.setItem("tasksKey", json);
-}
-
-function collectLocalStorage() {
-  let json = localStorage.getItem("tasksKey");
-
-  if (json != null) {
-    let mask = JSON.parse(json);
-    toDo = mask;
-    readList();
-  }
-}
-
-function deleteLocalStorage(collectedTasks) {
-  let index = toDo.findIndex((toDoTask) => toDoTask === collectedTasks);
-  if (index > -1) {
-    toDo.splice(index, 1);
-  }
-  saveToLocalStorage();
-}
-
-function readList() {
-  listElement.textContent = "";
-  toDo.forEach((collectedTasks) => {
-    addAndRemoveTasks(collectedTasks);
-  });
-}
-=======
-}
-
-window.addEventListener("load", () => {
-  const task = localStorage.saveTask;
-});
->>>>>>> parent of cfcfe46 (attempt 2 savestorage)
