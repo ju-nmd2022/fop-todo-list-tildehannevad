@@ -8,28 +8,16 @@ const addTaskElement = document.getElementById("plus");
 const listElement = document.getElementById("list");
 const doneElement = document.getElementById("done");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 let toDo = [];
 collectLocalStorage();
 
-=======
->>>>>>> parent of e8d7162 (storage not working)
-=======
->>>>>>> parent of e8d7162 (storage not working)
 // when plus-button is pressed the function addAndRemoveTasks starts
 addTaskElement.onclick = addAndRemoveTasks;
 
 function addAndRemoveTasks(collectedTasks) {
   //Causes the input value to be in the list
-<<<<<<< HEAD
-=======
 
   let toDo = [];
-<<<<<<< HEAD
->>>>>>> parent of e8d7162 (storage not working)
-=======
->>>>>>> parent of e8d7162 (storage not working)
   let task = taskFieldElement.value;
 
   toDo.push(task);
@@ -56,15 +44,11 @@ function addAndRemoveTasks(collectedTasks) {
     doneList.appendChild(doneText);
     doneElement.appendChild(doneList);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     saveToLocalStorage();
-=======
+
     listElement.removeChild(toDoList);
->>>>>>> parent of e8d7162 (storage not working)
-=======
+
     listElement.removeChild(toDoList);
->>>>>>> parent of e8d7162 (storage not working)
   });
 
   //Removes the task when the trashbin is pressed
@@ -72,15 +56,10 @@ function addAndRemoveTasks(collectedTasks) {
   trashBin.src = "images.jpeg";
 
   trashBin.addEventListener("click", () => {
-<<<<<<< HEAD
     deleteLocalStorage(collectedTasks);
     readList();
-=======
+
     listElement.removeChild(toDoList);
-<<<<<<< HEAD
->>>>>>> parent of e8d7162 (storage not working)
-=======
->>>>>>> parent of e8d7162 (storage not working)
   });
 
   toDoList.appendChild(checkBox);
@@ -89,8 +68,6 @@ function addAndRemoveTasks(collectedTasks) {
   listElement.appendChild(toDoList);
 
   taskFieldElement.value = "";
-<<<<<<< HEAD
-<<<<<<< HEAD
   saveToLocalStorage();
 }
 
@@ -124,23 +101,3 @@ function readList() {
     addAndRemoveTasks(collectedTasks);
   });
 }
-=======
-
-  toDo = JSON.stringify(toDo);
-  localStorage.setItem("savedTasks", toDo);
-}
-
-window.addEventListener("load", () => {
-  // const task = localStorage.getItem(task);
-});
->>>>>>> parent of e8d7162 (storage not working)
-=======
-
-  toDo = JSON.stringify(toDo);
-  localStorage.setItem("savedTasks", toDo);
-}
-
-window.addEventListener("load", () => {
-  // const task = localStorage.getItem(task);
-});
->>>>>>> parent of e8d7162 (storage not working)
