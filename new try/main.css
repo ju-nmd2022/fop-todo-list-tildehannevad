@@ -10,13 +10,29 @@ header {
 
 #container {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .list {
   padding: 1rem;
   display: grid;
   grid-template-columns: 2fr 2fr;
+}
+
+.bring {
+  background-color: lightgreen;
+  padding: 1rem;
+  width: 30rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+#instructionText {
+  font-size: 1.5rem;
+}
+
+#packListText {
+  font-size: 1.5rem;
 }
 
 #bagSize {
@@ -38,5 +54,5 @@ header {
 }
 
 .regretButton {
-    font-size: 1rem;
+  font-size: 1rem;
 }

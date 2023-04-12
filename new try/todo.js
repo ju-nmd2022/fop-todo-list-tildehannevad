@@ -16,39 +16,48 @@ const vacationItems = [
   "👡",
 ];
 const itemListElement = document.getElementById("itemList");
+const chooseListElement = document.getElementById("bringList");
 const packedListElement = document.getElementById("packedList");
 const bagSizeElement = document.getElementById("bagSize");
 
 let vacationBag = [];
+let bringList = [];
 
 for (let item of vacationItems) {
   const itemElement = document.createElement("div");
   itemElement.innerText = item;
   itemElement.classList.add("item");
-  itemElement.onclick = addToBagList;
+  itemElement.onclick = addToChooseList;
   itemListElement.appendChild(itemElement);
 }
 
-function addToBagList() {
-  vacationBag.push(this.innerText);
+function addToChooseList() {
+  bringList.push(this.innerText);
 
-  const bagElement = document.createElement("div");
+  const chooseElement = document.createElement("div");
 
   const spanElement = document.createElement("span");
   spanElement.innerText = this.innerText;
-  bagElement.appendChild(spanElement);
+  chooseElement.appendChild(spanElement);
+
+  const checkBox = document.createElement("input");
+  checkBox.type = "radio";
+  checkBox.checked = false;
+
+  checkBox.addEventListener("click", () => {
+    checkBox.checked = true;
+  });
 
   const button = document.createElement("button");
   button.classList.add("regretButton");
   button.innerText = "regret";
-  button.onclick = packedInBag;
-  bagElement.appendChild(button);
+  button.onclick = writtenOnList;
+  chooseElement.appendChild(button);
 
-  packedListElement.appendChild(bagElement);
-  bagSize();
+  chooseListElement.appendChild(chooseElement);
 }
 
-function packedInBag() {
+function writtenOnList() {
   const vacationElement = this.parentNode;
 
   const itemElement = vacationElement.querySelector("span");
