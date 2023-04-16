@@ -27,37 +27,56 @@ for (let item of vacationItems) {
   const itemElement = document.createElement("div");
   itemElement.innerText = item;
   itemElement.classList.add("item");
-  itemElement.onclick = addToChooseList;
+  itemElement.onclick = addToBringList;
+  // itemElement.onclick = addToBag;
   itemListElement.appendChild(itemElement);
 }
 
-function addToChooseList() {
+function addToBringList() {
   bringList.push(this.innerText);
 
-  const chooseElement = document.createElement("div");
+  const bringElement = document.createElement("div");
 
   const spanElement = document.createElement("span");
   spanElement.innerText = this.innerText;
-  chooseElement.appendChild(spanElement);
+  bringElement.appendChild(spanElement);
 
   const checkBox = document.createElement("input");
   checkBox.type = "radio";
   checkBox.checked = false;
 
   checkBox.addEventListener("click", () => {
-    checkBox.checked = true;
+    addToBag.apply(this);
+
+    chooseListElement.removeChild(bringElement);
   });
+
+  bringElement.appendChild(checkBox);
+
+  chooseListElement.appendChild(bringElement);
+}
+
+function addToBag() {
+  vacationBag.push(this.innerText);
+
+  const packedElement = document.createElement("div");
+
+  const spanElement = document.createElement("span");
+  spanElement.innerText = this.innerText;
+  packedElement.appendChild(spanElement);
 
   const button = document.createElement("button");
   button.classList.add("regretButton");
   button.innerText = "regret";
-  button.onclick = writtenOnList;
-  chooseElement.appendChild(button);
+  button.onclick = packedInBag;
+  packedElement.appendChild(button);
 
-  chooseListElement.appendChild(chooseElement);
+  packedListElement.appendChild(packedElement);
+
+  bagSize();
 }
 
-function writtenOnList() {
+function packedInBag() {
   const vacationElement = this.parentNode;
 
   const itemElement = vacationElement.querySelector("span");
@@ -66,6 +85,7 @@ function writtenOnList() {
   vacationBag.splice(emojiIndex, 1);
 
   vacationElement.parentNode.removeChild(vacationElement);
+
   bagSize();
 }
 
