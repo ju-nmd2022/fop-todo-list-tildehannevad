@@ -23,15 +23,22 @@ const bagSizeElement = document.getElementById("bagSize");
 let vacationBag = [];
 let bringList = [];
 
+// Showing vacation items on the webpage
 for (let item of vacationItems) {
   const itemElement = document.createElement("div");
   itemElement.innerText = item;
   itemElement.classList.add("item");
   itemElement.onclick = addToBringList;
-  // itemElement.onclick = addToBag;
   itemListElement.appendChild(itemElement);
 }
 
+// Function to update localStorage with the latest data
+function updateLocalStorage() {
+  localStorage.setItem("vacationBag", JSON.stringify(vacationBag));
+  localStorage.setItem("bringList", JSON.stringify(bringList));
+}
+
+// Add vacationItem to bringList
 function addToBringList() {
   bringList.push(this.innerText);
 
@@ -54,8 +61,11 @@ function addToBringList() {
   bringElement.appendChild(checkBox);
 
   chooseListElement.appendChild(bringElement);
+
+  updateLocalStorage();
 }
 
+// Add vacationItem to vacationBag
 function addToBag() {
   vacationBag.push(this.innerText);
 
@@ -74,9 +84,12 @@ function addToBag() {
   packedListElement.appendChild(packedElement);
 
   bagSize();
+
+  updateLocalStorage();
 }
 
-function packedInBag() {
+// Remove vacationItem from vacationBag
+function removedFromBag() {
   const vacationElement = this.parentNode;
 
   const itemElement = vacationElement.querySelector("span");
@@ -87,8 +100,11 @@ function packedInBag() {
   vacationElement.parentNode.removeChild(vacationElement);
 
   bagSize();
+
+  updateLocalStorage();
 }
 
+// Increases the bagSize when vacationItem(s) are added
 function bagSize() {
   if (vacationBag.length === 0) {
     bagSizeElement.innerText = "Bag size: unpacked";
@@ -111,4 +127,6 @@ function bagSize() {
   if (vacationBag.length === 15) {
     bagSizeElement.innerText = "Bag size: ENOURMOUS";
   }
+
+  updateLocalStorage();
 }
