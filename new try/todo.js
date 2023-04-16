@@ -72,13 +72,13 @@ function addToBag() {
   const packedElement = document.createElement("div");
 
   const spanElement = document.createElement("span");
-  spanElement.innerText = this.innerText;
+  spanElement.innerText = vacationBag;
   packedElement.appendChild(spanElement);
 
   const button = document.createElement("button");
   button.classList.add("regretButton");
   button.innerText = "regret";
-  button.onclick = packedInBag;
+  button.onclick = removedFromBag;
   packedElement.appendChild(button);
 
   packedListElement.appendChild(packedElement);
@@ -130,3 +130,59 @@ function bagSize() {
 
   updateLocalStorage();
 }
+
+// To save the vacationItem when the webpage is reloaded
+window.addEventListener("load", () => {
+  // Check if data exists in localStorage
+  if (
+    localStorage.getItem("vacationBag") &&
+    localStorage.getItem("bringList")
+  ) {
+    // Retrieve data from localStorage and parse it to populate the arrays
+    vacationBag = JSON.parse(localStorage.getItem("vacationBag"));
+    bringList = JSON.parse(localStorage.getItem("bringList"));
+
+    // Loop through the bringList array and create DOM elements to display on the webpage
+    for (let item of bringList) {
+      const bringElement = document.createElement("div");
+
+      const spanElement = document.createElement("span");
+      spanElement.innerText = item;
+      bringElement.appendChild(spanElement);
+
+      const checkBox = document.createElement("input");
+      checkBox.type = "radio";
+      checkBox.checked = false;
+
+      checkBox.addEventListener("click", () => {
+        addToBag.apply(this);
+
+        chooseListElement.removeChild(bringElement);
+      });
+
+      bringElement.appendChild(checkBox);
+
+      chooseListElement.appendChild(bringElement);
+    }
+
+    // Loop through the vacationBag array and create DOM elements to display on the webpage
+    for (let item of vacationBag) {
+      const packedElement = document.createElement("div");
+
+      const spanElement = document.createElement("span");
+      spanElement.innerText = item;
+      packedElement.appendChild(spanElement);
+
+      const button = document.createElement("button");
+      button.classList.add("regretButton");
+      button.innerText = "regret";
+      button.onclick = removedFromBag;
+      packedElement.appendChild(button);
+
+      packedListElement.appendChild(packedElement);
+    }
+
+    // Update bagSize
+    bagSize();
+  }
+});
