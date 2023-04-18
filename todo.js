@@ -1,188 +1,101 @@
-const vacationItems = [
-  "🎧",
-  "⛺️",
-  "🪥",
-  "✂️",
-  "📕",
-  "🧸",
-  "📱",
-  "🎲",
-  "🎷",
-  "🤿",
-  "🍭",
-  "🕶️",
-  "🌂",
-  "🧢",
-  "👡",
-];
-const itemListElement = document.getElementById("itemList");
-const chooseListElement = document.getElementById("bringList");
-const packedListElement = document.getElementById("packedList");
-const bagSizeElement = document.getElementById("bagSize");
+// Foundations Of Programming
+// Tilde Hannevad
+// To Do List
+// 2023-04-04
 
-let vacationBag = [];
-let bringList = [];
+const taskFieldElement = document.getElementById("taskField");
+const addTaskElement = document.getElementById("plus");
+const listElement = document.getElementById("list");
 
-// Showing vacation items on the webpage
-for (let item of vacationItems) {
-  const itemElement = document.createElement("div");
-  itemElement.innerText = item;
-  itemElement.classList.add("item");
-  itemElement.onclick = addToBringList;
-  itemListElement.appendChild(itemElement);
+const LOCALSTORAGEKEY = "localStorageKey";
+
+let toDo = [];
+getLocalStorage();
+
+// My object, taskName = taskFieldElement value
+// Push my objects to the array
+function taskObject() {
+  let newTask = {
+    taskName: taskFieldElement.value,
+    checked: false,
+  };
+  toDo.push(newTask);
+  taskFieldElement.value = "";
+  localStorageString();
 }
 
-// Function to update localStorage with the latest data
-function updateLocalStorage() {
-  localStorage.setItem("vacationBag", JSON.stringify(vacationBag));
-  localStorage.setItem("bringList", JSON.stringify(bringList));
+addTaskElement.addEventListener("click", () => {
+  taskObject();
+});
+
+// LocalStorage function
+function localStorageString() {
+  let jsonString = JSON.stringify(toDo);
+  localStorage.setItem(LOCALSTORAGEKEY, jsonString);
 }
 
-// Add vacationItem to bringList
-function addToBringList() {
-  bringList.push(this.innerText);
+function getLocalStorage() {
+  let jsonGet = localStorage.getItem(LOCALSTORAGEKEY);
 
-  const bringElement = document.createElement("div");
+  if (jsonGet !== null) {
+    let jsonParse = JSON.parse(jsonGet);
+    toDo = jsonParse;
+    render();
+  }
+}
 
-  const spanElement = document.createElement("span");
-  spanElement.innerText = this.innerText;
-  bringElement.appendChild(spanElement);
+// My main function where I create everything
+function addAndRemoveTasks(task) {
+  const toDoList = document.createElement("li");
+  const toDoText = document.createElement("p");
 
+  toDoText.innerText = task.taskName;
+
+  //Creates the checkbox and the click-function of it
   const checkBox = document.createElement("input");
   checkBox.type = "radio";
-  checkBox.checked = false;
+  checkBox.checked = task.checked;
+
+  task.inputButton = checkBox;
+  task.text = toDoText;
+  task.parent = toDoList;
 
   checkBox.addEventListener("click", () => {
-    addToBag.apply(this);
-
-    chooseListElement.removeChild(bringElement);
+    checkedTask(task);
   });
 
-  bringElement.appendChild(checkBox);
+  const trashBin = document.createElement("img");
+  trashBin.src = "images.jpeg";
 
-  chooseListElement.appendChild(bringElement);
+  trashBin.addEventListener("click", () => {
+    deletedTask(task);
+  });
 
-  updateLocalStorage();
+  toDoList.appendChild(checkBox);
+  toDoList.appendChild(trashBin);
+  toDoList.appendChild(toDoText);
+  listElement.appendChild(task.parent);
+
+  taskFieldElement.value = "";
 }
 
-// Add vacationItem to vacationBag
-function addToBag() {
-  vacationBag.push(this.innerText);
-
-  const packedElement = document.createElement("div");
-
-  const spanElement = document.createElement("span");
-  spanElement.innerText = vacationBag;
-  packedElement.appendChild(spanElement);
-
-  const button = document.createElement("button");
-  button.classList.add("regretButton");
-  button.innerText = "regret";
-  button.onclick = removedFromBag;
-  packedElement.appendChild(button);
-
-  packedListElement.appendChild(packedElement);
-
-  bagSize();
-
-  updateLocalStorage();
+function checkedTask(task) {
+  task.checked = true;
+  localStorageString();
 }
 
-// Remove vacationItem from vacationBag
-function removedFromBag() {
-  const vacationElement = this.parentNode;
-
-  const itemElement = vacationElement.querySelector("span");
-  const emoji = itemElement.innerText;
-  const emojiIndex = vacationBag.indexOf(emoji);
-  vacationBag.splice(emojiIndex, 1);
-
-  vacationElement.parentNode.removeChild(vacationElement);
-
-  bagSize();
-
-  updateLocalStorage();
+function deletedTask(task) {
+  let index = toDo.findIndex((taskIndex) => taskIndex.name === task.taskName);
+  if (index > -1) {
+    toDo.splice(index, 1);
+  }
+  listElement.removeChild(task.parent);
+  localStorageString();
 }
 
-// Increases the bagSize when vacationItem(s) are added
-function bagSize() {
-  if (vacationBag.length === 0) {
-    bagSizeElement.innerText = "Bag size: unpacked";
-  }
-  if (vacationBag.length === 1) {
-    bagSizeElement.innerText = "Bag size: tiny";
-  }
-  if (vacationBag.length === 5) {
-    bagSizeElement.innerText = "Bag size: bigger";
-  }
-  if (vacationBag.length === 7) {
-    bagSizeElement.innerText = "Bag size: even bigger";
-  }
-  if (vacationBag.length === 10) {
-    bagSizeElement.innerText = "Bag size: huge";
-  }
-  if (vacationBag.length === 13) {
-    bagSizeElement.innerText = "Bag size: reeeeally big";
-  }
-  if (vacationBag.length === 15) {
-    bagSizeElement.innerText = "Bag size: ENOURMOUS";
-  }
-
-  updateLocalStorage();
+function render() {
+  listElement.innerHTML = "";
+  toDo.forEach((task) => {
+    addAndRemoveTasks(task);
+  });
 }
-
-// To save the vacationItem when the webpage is reloaded
-window.addEventListener("load", () => {
-  // Check if data exists in localStorage
-  if (
-    localStorage.getItem("vacationBag") &&
-    localStorage.getItem("bringList")
-  ) {
-    // Retrieve data from localStorage and parse it to populate the arrays
-    vacationBag = JSON.parse(localStorage.getItem("vacationBag"));
-    bringList = JSON.parse(localStorage.getItem("bringList"));
-
-    // Loop through the bringList array and create DOM elements to display on the webpage
-    for (let item of bringList) {
-      const bringElement = document.createElement("div");
-
-      const spanElement = document.createElement("span");
-      spanElement.innerText = item;
-      bringElement.appendChild(spanElement);
-
-      const checkBox = document.createElement("input");
-      checkBox.type = "radio";
-      checkBox.checked = false;
-
-      checkBox.addEventListener("click", () => {
-        addToBag.apply(this);
-
-        chooseListElement.removeChild(bringElement);
-      });
-
-      bringElement.appendChild(checkBox);
-
-      chooseListElement.appendChild(bringElement);
-    }
-
-    // Loop through the vacationBag array and create DOM elements to display on the webpage
-    for (let item of vacationBag) {
-      const packedElement = document.createElement("div");
-
-      const spanElement = document.createElement("span");
-      spanElement.innerText = item;
-      packedElement.appendChild(spanElement);
-
-      const button = document.createElement("button");
-      button.classList.add("regretButton");
-      button.innerText = "regret";
-      button.onclick = removedFromBag;
-      packedElement.appendChild(button);
-
-      packedListElement.appendChild(packedElement);
-    }
-
-    // Update bagSize
-    bagSize();
-  }
-});
