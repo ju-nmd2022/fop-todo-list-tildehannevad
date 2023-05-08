@@ -12,7 +12,7 @@ const LOCALSTORAGEKEY = "localStorageKey";
 let toDo = [];
 getLocalStorage();
 
-// My object, taskName = taskFieldElement value
+// My object = text written in taskField
 // Push my objects to the array
 function taskObject() {
   let newTask = {
@@ -29,11 +29,13 @@ addTaskElement.addEventListener("click", () => {
 });
 
 // LocalStorage function
+// First convert the object to string to save in localStorage
 function localStorageString() {
   let jsonString = JSON.stringify(toDo);
   localStorage.setItem(LOCALSTORAGEKEY, jsonString);
 }
 
+// Then convert back from string to object to show in ToDoList
 function getLocalStorage() {
   let jsonGet = localStorage.getItem(LOCALSTORAGEKEY);
 
@@ -49,6 +51,7 @@ function addAndRemoveTasks(task) {
   const toDoList = document.createElement("li");
   const toDoText = document.createElement("p");
 
+  // Explains that the objectname is related to all functions created with (task)
   toDoText.innerText = task.taskName;
 
   //Creates the checkbox and the click-function of it
@@ -56,6 +59,7 @@ function addAndRemoveTasks(task) {
   checkBox.type = "radio";
   checkBox.checked = task.checked;
 
+  // task.whatever explains that it belongs to the object
   task.inputButton = checkBox;
   task.text = toDoText;
   task.parent = toDoList;
@@ -71,6 +75,7 @@ function addAndRemoveTasks(task) {
     deletedTask(task);
   });
 
+  // listElement is parent for toDoList and toDoList is parent for everything in the list
   toDoList.appendChild(checkBox);
   toDoList.appendChild(trashBin);
   toDoList.appendChild(toDoText);
@@ -84,6 +89,7 @@ function checkedTask(task) {
   localStorageString();
 }
 
+// Finds the right number of the object in the list and removes it
 function deletedTask(task) {
   let index = toDo.findIndex((taskIndex) => taskIndex.name === task.taskName);
   if (index > -1) {
