@@ -22,6 +22,7 @@ function taskObject() {
   toDo.push(newTask);
   taskFieldElement.value = "";
   localStorageString();
+  render();
 }
 
 addTaskElement.addEventListener("click", () => {
@@ -91,7 +92,9 @@ function checkedTask(task) {
 
 // Finds the right number of the object in the list and removes it
 function deletedTask(task) {
-  let index = toDo.findIndex((taskIndex) => taskIndex.name === task.taskName);
+  let index = toDo.findIndex(
+    (taskIndex) => taskIndex.taskName === task.taskName
+  );
   if (index > -1) {
     toDo.splice(index, 1);
   }
