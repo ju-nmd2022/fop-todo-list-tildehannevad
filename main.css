@@ -1,0 +1,72 @@
+* {
+  font-family: sans-serif;
+}
+
+header img {
+  width: 20vw;
+  margin-left: 40%;
+  position: absolute;
+}
+
+h1 {
+  z-index: 1;
+  color: lightpink;
+  text-align: center;
+}
+
+#taskMaker {
+  text-align: center;
+}
+
+#taskField {
+  border: 2px solid #777777;
+  height: 1.3rem;
+  width: 10rem;
+}
+
+#plus {
+  size: large;
+}
+
+h2 {
+  font-family: serif;
+  font-size: medium;
+}
+
+ul li {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1rem 3rem 1fr;
+  padding: 1rem;
+}
+
+ul li input {
+  width: 1rem;
+  height: 1rem;
+}
+
+ul li p {
+  margin: 0;
+}
+
+ul li img {
+  width: 1.2rem;
+  margin: auto;
+}
+
+/* The following 7 lines of code is collected from https://stackoverflow.com/questions/6921792/how-to-draw-circle-in-html-page retrived 23-04-04*/
+#circle {
+  width: 20rem;
+  height: 20rem;
+  -webkit-border-radius: 10rem;
+  -moz-border-radius: 10rem;
+  border-radius: 10rem;
+  background: lightblue;
+  text-align: center;
+}
+
+#article {
+  display: flex;
+  justify-content: center;
+  padding-top: 10vh;
+}
